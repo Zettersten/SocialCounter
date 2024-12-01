@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35506.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialCounter", "SocialCounter\SocialCounter\SocialCounter.csproj", "{D74F6E74-5449-45D8-B1D7-607DA09E997D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialCounter.Facebook", "SocialCounter\SocialCounter.Facebook\SocialCounter.Facebook.csproj", "{6470DDCD-527D-4252-B900-A72C095AC324}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialCounter.Instagram", "SocialCounter\SocialCounter.Instagram\SocialCounter.Instagram.csproj", "{58AA2C1F-6C45-40A0-BFBF-815A0107C3E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialCounter.TikTok", "SocialCounter\SocialCounter.TikTok\SocialCounter.TikTok.csproj", "{7D13BDE8-3EE9-4165-A4D0-B510E701BB9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialCounter.LinkedIn", "SocialCounter\SocialCounter.LinkedIn\SocialCounter.LinkedIn.csproj", "{5F1CF889-EBAB-48F6-8E24-95AD92E692A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialCounter.X", "SocialCounter\SocialCounter.X\SocialCounter.X.csproj", "{F709F935-699F-45BF-A2FC-B7874F193594}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{B34D9181-5308-4BE6-A010-AC6B0E9271CF}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		readme.md = readme.md
+		version.json = version.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D74F6E74-5449-45D8-B1D7-607DA09E997D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D74F6E74-5449-45D8-B1D7-607DA09E997D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D74F6E74-5449-45D8-B1D7-607DA09E997D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D74F6E74-5449-45D8-B1D7-607DA09E997D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6470DDCD-527D-4252-B900-A72C095AC324}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6470DDCD-527D-4252-B900-A72C095AC324}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6470DDCD-527D-4252-B900-A72C095AC324}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6470DDCD-527D-4252-B900-A72C095AC324}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58AA2C1F-6C45-40A0-BFBF-815A0107C3E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58AA2C1F-6C45-40A0-BFBF-815A0107C3E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58AA2C1F-6C45-40A0-BFBF-815A0107C3E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58AA2C1F-6C45-40A0-BFBF-815A0107C3E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D13BDE8-3EE9-4165-A4D0-B510E701BB9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D13BDE8-3EE9-4165-A4D0-B510E701BB9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D13BDE8-3EE9-4165-A4D0-B510E701BB9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D13BDE8-3EE9-4165-A4D0-B510E701BB9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F1CF889-EBAB-48F6-8E24-95AD92E692A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F1CF889-EBAB-48F6-8E24-95AD92E692A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F1CF889-EBAB-48F6-8E24-95AD92E692A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F1CF889-EBAB-48F6-8E24-95AD92E692A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F709F935-699F-45BF-A2FC-B7874F193594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F709F935-699F-45BF-A2FC-B7874F193594}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F709F935-699F-45BF-A2FC-B7874F193594}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F709F935-699F-45BF-A2FC-B7874F193594}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
