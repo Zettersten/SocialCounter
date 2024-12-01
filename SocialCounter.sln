@@ -20,6 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{B34D9181-5
 		.editorconfig = .editorconfig
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
+		icon.png = icon.png
 		LICENSE = LICENSE
 		.github\workflows\nuget-publish.yml = .github\workflows\nuget-publish.yml
 		readme.md = readme.md

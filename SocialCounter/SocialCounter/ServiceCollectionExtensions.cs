@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using static SocialCounter.ServiceCollectionExtensions;
@@ -23,6 +23,7 @@ public static class ServiceCollectionExtensions
         public int MaxRetryAttempts { get; set; } = 3;
         public TimeSpan InitialRetryDelay { get; set; } = TimeSpan.FromSeconds(1);
         public virtual string BaseAddress { get; set; } = string.Empty;
+
         public IDictionary<string, string> DefaultHeaders { get; set; } =
             new Dictionary<string, string>();
     }

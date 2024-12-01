@@ -1,3 +1,6 @@
+![BadBotBlocker Icon](https://raw.githubusercontent.com/Zettersten/SocialCounter/main/icon.png)
+
+
 # SocialCounter 📊
 
 [![NuGet version](https://badge.fury.io/nu/SocialCounter.svg)](https://badge.fury.io/nu/SocialCounter)

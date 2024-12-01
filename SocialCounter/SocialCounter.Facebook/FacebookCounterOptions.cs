@@ -1,4 +1,4 @@
-﻿using static SocialCounter.ServiceCollectionExtensions;
+using static SocialCounter.ServiceCollectionExtensions;
 
 namespace SocialCounter.Facebook;
 

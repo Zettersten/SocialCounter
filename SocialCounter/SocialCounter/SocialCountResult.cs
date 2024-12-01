@@ -1,4 +1,4 @@
-﻿namespace SocialCounter;
+namespace SocialCounter;
 
 public sealed record SocialCountResult(string Platform, string Handle, int Count)
 {

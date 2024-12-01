@@ -1,7 +1,7 @@
-﻿using System.Net;
 using Microsoft.Extensions.Logging;
 using Polly;
 using Polly.Retry;
+using System.Net;
 
 namespace SocialCounter;
 

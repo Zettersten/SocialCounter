@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Hosting;
 using SocialCounter.Facebook;
 using SocialCounter.Instagram;
 using SocialCounter.LinkedIn;

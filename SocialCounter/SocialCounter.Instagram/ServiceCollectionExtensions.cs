@@ -1,6 +1,6 @@
-﻿using System.Net;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using System.Net;
 using static SocialCounter.ServiceCollectionExtensions;
 
 namespace SocialCounter.Instagram;
