@@ -23,11 +23,23 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <EnablePreviewFeatures>true</EnablePreviewFeatures>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <PublishAot>false</PublishAot>
     <IsAotCompatible>true</IsAotCompatible>
     <NoWarn>CS1591;CS0618;CS1573</NoWarn>
+    <Description>
+      A high-performance .NET library for fetching and aggregating social media metrics across multiple platforms.
+      SocialCounter provides a unified interface to retrieve follower counts and other social metrics while handling
+      rate limiting, retries, and failures gracefully.
+
+      Key Features:
+      - Unified API for fetching social metrics across different platforms
+      - Built-in resilience with automatic retry policies and exponential backoff
+      - Parallel processing of requests to multiple social media platforms
+      - Extensible design for adding new platform implementations
+      - Configurable timeouts and comprehensive error handling
+    </Description>
+    <PackageTags>social-media;metrics;analytics;dotnet;csharp;http-client</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
