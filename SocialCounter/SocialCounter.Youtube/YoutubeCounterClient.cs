@@ -2,7 +2,6 @@ using Microsoft.Extensions.Logging;
 
 namespace SocialCounter.Youtube;
 
-
 public sealed partial class YoutubeCounterClient : SocialMediaClient
 {
     private readonly ILogger<YoutubeCounterClient> logger;

@@ -16,12 +16,12 @@ internal class Startup
         {
             services
                 .AddSocialCounters()
-                .AddYoutubeCounter()
                 .AddInstagramCounter()
                 .AddXCounter()
                 .AddTikTokCounter()
                 .AddFacebookCounter()
-                .AddLinkedInCounter();
+                .AddLinkedInCounter()
+                .AddYoutubeCounter();
         });
     }
 }
