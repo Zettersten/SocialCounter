@@ -27,21 +27,21 @@ public sealed partial class LinkedInCounterClient : SocialMediaClient
         try
         {
             // LinkedIn profiles are accessed by their handle
-            var response = await GetAsync(
+            var response = await this.GetAsync(
                 $"/search?q=\"https%3A%2F%2Fwww.linkedin.com%2Fin%2F{handle}\"",
                 cancellationToken
             );
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync(cancellationToken);
-            logger.LogDebug("Received content for LinkedIn profile {Handle}", handle);
+            this.logger.LogDebug("Received content for LinkedIn profile {Handle}", handle);
             var followers = ExtractFollowerCount(content, handle);
-            return new SocialCountResult(Platform, handle, followers);
+            return new SocialCountResult(this.Platform, handle, followers);
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, "Failed to get LinkedIn follower count for {Handle}", handle);
+            this.logger.LogError(ex, "Failed to get LinkedIn follower count for {Handle}", handle);
 
-            return SocialCountResult.Empty(Platform, handle);
+            return SocialCountResult.Empty(this.Platform, handle);
         }
     }
 

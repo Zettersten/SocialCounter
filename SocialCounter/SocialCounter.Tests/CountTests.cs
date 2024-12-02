@@ -35,7 +35,7 @@ public class CountTests
     [Fact]
     public async Task Should_Return_Instagram_Count()
     {
-        var count = await instagramCounterClient.GetCount("zettersten", CancellationToken.None);
+        var count = await this.instagramCounterClient.GetCount("zettersten", CancellationToken.None);
 
         Assert.NotNull(count);
         Assert.True(count.Count > 0);
@@ -44,7 +44,7 @@ public class CountTests
     [Fact]
     public async Task Should_Return_X_Count()
     {
-        var count = await xCounterClient.GetCount("zettersten", CancellationToken.None);
+        var count = await this.xCounterClient.GetCount("zettersten", CancellationToken.None);
 
         Assert.NotNull(count);
         Assert.True(count.Count > 0);
@@ -53,7 +53,7 @@ public class CountTests
     [Fact]
     public async Task Should_Return_TikTok_Count()
     {
-        var count = await tikTokCounterClient.GetCount("garyvee", CancellationToken.None);
+        var count = await this.tikTokCounterClient.GetCount("garyvee", CancellationToken.None);
 
         Assert.NotNull(count);
         Assert.True(count.Count > 0);
@@ -62,7 +62,7 @@ public class CountTests
     [Fact]
     public async Task Should_Return_Facebook_Count()
     {
-        var count = await facebookCounterClient.GetCount(
+        var count = await this.facebookCounterClient.GetCount(
             "VeeFriendsOfficial",
             CancellationToken.None
         );
@@ -74,7 +74,7 @@ public class CountTests
     [Fact]
     public async Task Should_Return_LinkedIn_Count()
     {
-        var count = await linkedInCounter.GetCount("zettersten", CancellationToken.None);
+        var count = await this.linkedInCounter.GetCount("zettersten", CancellationToken.None);
 
         Assert.NotNull(count);
         Assert.True(count.Count > 0);
@@ -83,7 +83,7 @@ public class CountTests
     [Fact]
     public async Task Should_Return_All_Counts()
     {
-        var counts = await socialCounters.GetCountAsync("zettersten", CancellationToken.None);
+        var counts = await this.socialCounters.GetCountAsync("zettersten", CancellationToken.None);
 
         Assert.NotNull(counts);
         Assert.NotEmpty(counts);

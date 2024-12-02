@@ -21,7 +21,7 @@ public sealed class SocialCounters
         var results = new List<SocialCountResult>();
 
         await Task.WhenAll(
-            counters.Select(async counter =>
+            this.counters.Select(async counter =>
             {
                 try
                 {
@@ -32,7 +32,7 @@ public sealed class SocialCounters
                 catch (Exception ex)
                 {
                     // Log and continue
-                    logger.LogError(
+                    this.logger.LogError(
                         ex,
                         "Failed to get count for {Platform} handle {Handle}",
                         counter.Platform,

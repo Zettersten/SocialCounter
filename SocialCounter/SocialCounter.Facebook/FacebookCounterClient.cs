@@ -26,17 +26,17 @@ public sealed partial class FacebookCounterClient : SocialMediaClient
     {
         try
         {
-            var response = await GetAsync($"/{handle}/followers", cancellationToken);
+            var response = await this.GetAsync($"/{handle}/followers", cancellationToken);
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync(cancellationToken);
-            logger.LogDebug("Received content for Facebook page {Handle}", handle);
+            this.logger.LogDebug("Received content for Facebook page {Handle}", handle);
             var followers = ExtractFollowerCount(content, handle);
-            return new SocialCountResult(Platform, handle, followers);
+            return new SocialCountResult(this.Platform, handle, followers);
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, "Failed to get Facebook follower count for {Handle}", handle);
-            return SocialCountResult.Empty(Platform, handle);
+            this.logger.LogError(ex, "Failed to get Facebook follower count for {Handle}", handle);
+            return SocialCountResult.Empty(this.Platform, handle);
         }
     }
 

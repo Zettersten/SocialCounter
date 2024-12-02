@@ -29,6 +29,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{B34D9181-5
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialCounter.Tests", "SocialCounter\SocialCounter.Tests\SocialCounter.Tests.csproj", "{EE96E474-1FEB-4E4A-A9C5-CD68F8DB8242}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialCounter.Youtube", "SocialCounter\SocialCounter.Youtube\SocialCounter.Youtube.csproj", "{CAED8623-A72D-4E91-AF63-FCA64E2E4CAE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{EE96E474-1FEB-4E4A-A9C5-CD68F8DB8242}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE96E474-1FEB-4E4A-A9C5-CD68F8DB8242}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE96E474-1FEB-4E4A-A9C5-CD68F8DB8242}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAED8623-A72D-4E91-AF63-FCA64E2E4CAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAED8623-A72D-4E91-AF63-FCA64E2E4CAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAED8623-A72D-4E91-AF63-FCA64E2E4CAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAED8623-A72D-4E91-AF63-FCA64E2E4CAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

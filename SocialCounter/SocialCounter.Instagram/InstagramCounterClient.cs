@@ -26,19 +26,19 @@ public sealed partial class InstagramCounterClient : SocialMediaClient
     {
         try
         {
-            var response = await GetAsync($"/{handle}/", cancellationToken);
+            var response = await this.GetAsync($"/{handle}/", cancellationToken);
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync(cancellationToken);
             var followers = ExtractFollowerCount(content, handle);
 
-            return new SocialCountResult(Platform, handle, followers);
+            return new SocialCountResult(this.Platform, handle, followers);
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, "Failed to get LinkedIn follower count for {Handle}", handle);
+            this.logger.LogError(ex, "Failed to get LinkedIn follower count for {Handle}", handle);
 
-            return SocialCountResult.Empty(Platform, handle);
+            return SocialCountResult.Empty(this.Platform, handle);
         }
     }
 

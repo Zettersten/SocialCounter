@@ -3,38 +3,42 @@ using Microsoft.Extensions.Options;
 using System.Net;
 using static SocialCounter.ServiceCollectionExtensions;
 
-namespace SocialCounter.LinkedIn;
+namespace SocialCounter.Youtube;
 
 public static class ServiceCollectionExtensions
 {
-    public static SocialCounterBuilder AddLinkedInCounter(
+    public static SocialCounterBuilder AddYoutubeCounter(
         this SocialCounterBuilder builder,
-        Action<LinkedInCounterOptions>? configureOptions = null
+        Action<YoutubeCounterClient>? configureOptions = null
     )
     {
         var services = builder.Services;
 
+        // Register Instagram-specific options
         if (configureOptions != null)
         {
             services.Configure(configureOptions);
         }
 
+        // Register Instagram client with its own HttpClient
         services
-            .AddHttpClient<LinkedInCounterClient>()
+            .AddHttpClient<YoutubeCounterClient>()
             .ConfigureHttpClient(
                 (sp, client) =>
                 {
-                    var options = sp.GetRequiredService<IOptions<LinkedInCounterOptions>>().Value;
+                    var options = sp.GetRequiredService<IOptions<YoutubeCounterOptions>>().Value;
+
                     client.BaseAddress = new Uri(options.BaseAddress);
-                    client.Timeout = options.Timeout;
 
                     // Clear any existing headers
                     client.DefaultRequestHeaders.Clear();
+                    client.DefaultRequestVersion = new Version(2, 0);
+                    client.Timeout = options.Timeout;
 
-                    // Add headers that mimic a mobile browser (better for Facebook)
+                    // Add headers one by one with proper formatting
                     client.DefaultRequestHeaders.TryAddWithoutValidation(
                         "Accept",
-                        "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+                        "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8"
                     );
                     client.DefaultRequestHeaders.TryAddWithoutValidation(
                         "Accept-Language",
@@ -48,16 +52,19 @@ public static class ServiceCollectionExtensions
                         "Cache-Control",
                         "no-cache"
                     );
-                    client.DefaultRequestHeaders.TryAddWithoutValidation("Pragma", "no-cache");
-                    client.DefaultRequestHeaders.TryAddWithoutValidation("DNT", "1");
-
-                    // Mobile User-Agent tends to work better with Facebook
                     client.DefaultRequestHeaders.TryAddWithoutValidation(
-                        "User-Agent",
-                        "Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile/15E148 Safari/604.1"
+                        "Connection",
+                        "keep-alive"
                     );
-
-                    // Add basic Facebook-specific headers
+                    client.DefaultRequestHeaders.TryAddWithoutValidation(
+                        "Sec-Ch-Ua",
+                        "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+                    );
+                    client.DefaultRequestHeaders.TryAddWithoutValidation("Sec-Ch-Ua-Mobile", "?0");
+                    client.DefaultRequestHeaders.TryAddWithoutValidation(
+                        "Sec-Ch-Ua-Platform",
+                        "\"Windows\""
+                    );
                     client.DefaultRequestHeaders.TryAddWithoutValidation(
                         "Sec-Fetch-Dest",
                         "document"
@@ -68,6 +75,13 @@ public static class ServiceCollectionExtensions
                     );
                     client.DefaultRequestHeaders.TryAddWithoutValidation("Sec-Fetch-Site", "none");
                     client.DefaultRequestHeaders.TryAddWithoutValidation("Sec-Fetch-User", "?1");
+                    client.DefaultRequestHeaders.TryAddWithoutValidation(
+                        "User-Agent",
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0"
+                    );
+
+                    // Set host explicitly
+                    client.DefaultRequestHeaders.Host = "www.youtube.com";
                 }
             )
             .ConfigurePrimaryHttpMessageHandler(
@@ -75,15 +89,18 @@ public static class ServiceCollectionExtensions
                     new HttpClientHandler
                     {
                         AutomaticDecompression = DecompressionMethods.All,
-                        AllowAutoRedirect = true,
-                        MaxAutomaticRedirections = 5,
+                        AllowAutoRedirect = false,
+                        MaxAutomaticRedirections = 1,
                         UseCookies = true,
-                        CookieContainer = new CookieContainer()
+                        CookieContainer = new CookieContainer(),
+                        ServerCertificateCustomValidationCallback = (sender, cert, chain, errors) =>
+                            true // Be careful with this in production
                     }
             );
 
+        // Register as SocialMediaClient for collection injection
         services.AddTransient<SocialMediaClient>(sp =>
-            sp.GetRequiredService<LinkedInCounterClient>()
+            sp.GetRequiredService<YoutubeCounterClient>()
         );
 
         return builder;

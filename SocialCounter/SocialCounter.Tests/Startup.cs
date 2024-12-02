@@ -4,6 +4,7 @@ using SocialCounter.Instagram;
 using SocialCounter.LinkedIn;
 using SocialCounter.TikTok;
 using SocialCounter.X;
+using SocialCounter.Youtube;
 
 namespace SocialCounter.Tests;
 
@@ -15,6 +16,7 @@ internal class Startup
         {
             services
                 .AddSocialCounters()
+                .AddYoutubeCounter()
                 .AddInstagramCounter()
                 .AddXCounter()
                 .AddTikTokCounter()

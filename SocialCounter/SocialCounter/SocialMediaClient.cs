@@ -15,7 +15,7 @@ public abstract class SocialMediaClient
     {
         this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        this.resiliencePipeline = BuildResiliencePipeline();
+        this.resiliencePipeline = this.BuildResiliencePipeline();
     }
 
     public abstract string Platform { get; }
@@ -45,7 +45,7 @@ public abstract class SocialMediaClient
     )
     {
         return this.ExecuteWithRetryAsync(
-            token => httpClient.GetAsync(requestUri, token),
+            token => this.httpClient.GetAsync(requestUri, token),
             cancellationToken
         );
     }
@@ -57,7 +57,7 @@ public abstract class SocialMediaClient
     )
     {
         return this.ExecuteWithRetryAsync(
-            token => httpClient.PostAsync(requestUri, content, token),
+            token => this.httpClient.PostAsync(requestUri, content, token),
             cancellationToken
         );
     }
@@ -92,9 +92,9 @@ public abstract class SocialMediaClient
 
                         if (arguments.Outcome.Result != null)
                         {
-                            logger.LogWarning(
+                            this.logger.LogWarning(
                                 "Request to {PlatformName} failed with status code {StatusCode}. Attempt {Attempt} of 3. Waiting {Delay}ms before next retry.",
-                                Platform,
+                                this.Platform,
                                 arguments.Outcome.Result.StatusCode,
                                 attempt,
                                 delay.TotalMilliseconds
@@ -102,10 +102,10 @@ public abstract class SocialMediaClient
                         }
                         else
                         {
-                            logger.LogWarning(
+                            this.logger.LogWarning(
                                 arguments.Outcome.Exception,
                                 "Request to {PlatformName} failed with exception. Attempt {Attempt} of 3. Waiting {Delay}ms before next retry.",
-                                Platform,
+                                this.Platform,
                                 attempt,
                                 delay.TotalMilliseconds
                             );
