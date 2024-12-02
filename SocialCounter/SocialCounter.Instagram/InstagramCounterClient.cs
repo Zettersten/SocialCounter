@@ -26,7 +26,7 @@ public sealed partial class InstagramCounterClient : SocialMediaClient
     {
         try
         {
-            var response = await this.GetAsync($"/{handle}/", cancellationToken);
+            var response = await this.GetAsync($"/{handle.StripAtSignFromHandle()}/", cancellationToken);
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync(cancellationToken);

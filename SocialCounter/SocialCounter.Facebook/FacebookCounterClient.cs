@@ -26,7 +26,7 @@ public sealed partial class FacebookCounterClient : SocialMediaClient
     {
         try
         {
-            var response = await this.GetAsync($"/{handle}/followers", cancellationToken);
+            var response = await this.GetAsync($"/{handle.StripAtSignFromHandle()}/followers", cancellationToken);
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync(cancellationToken);
             this.logger.LogDebug("Received content for Facebook page {Handle}", handle);

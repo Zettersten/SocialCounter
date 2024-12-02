@@ -90,4 +90,7 @@ public static class ServiceCollectionExtensions
         builder.HttpClientBuilder.ConfigureHttpClient(configureClient);
         return builder;
     }
+
+    public static string StripAtSignFromHandle(this string handle) =>
+        handle.StartsWith('@') ? handle[1..] : handle;
 }

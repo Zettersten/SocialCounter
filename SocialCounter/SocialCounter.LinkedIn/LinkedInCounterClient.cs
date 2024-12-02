@@ -28,7 +28,7 @@ public sealed partial class LinkedInCounterClient : SocialMediaClient
         {
             // LinkedIn profiles are accessed by their handle
             var response = await this.GetAsync(
-                $"/search?q=\"https%3A%2F%2Fwww.linkedin.com%2Fin%2F{handle}\"",
+                $"/search?q=\"https%3A%2F%2Fwww.linkedin.com%2Fin%2F{handle.StripAtSignFromHandle()}\"",
                 cancellationToken
             );
             response.EnsureSuccessStatusCode();
