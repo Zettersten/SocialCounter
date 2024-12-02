@@ -1,5 +1,4 @@
-![BadBotBlocker Icon](https://raw.githubusercontent.com/Zettersten/SocialCounter/main/icon.png)
-
+![SocialCounter Icon](https://raw.githubusercontent.com/Zettersten/SocialCounter/main/icon.png)
 
 # SocialCounter 📊
 
@@ -11,6 +10,7 @@ Welcome to **SocialCounter**, a high-performance .NET library designed to fetch 
 
 The **SocialCounter** library offers:
 
+- **Built-in Platform Support**: Ready-to-use implementations for Instagram, X (Twitter), TikTok, Facebook, LinkedIn, and YouTube
 - **Unified Interface**: A single, consistent API to fetch social metrics across different platforms
 - **Built-in Resilience**: Automatic retry policies with exponential backoff and jitter
 - **Parallel Processing**: Concurrent requests to multiple social media platforms
@@ -22,10 +22,16 @@ The **SocialCounter** library offers:
 
 ### Installation
 
-Install the SocialCounter package from NuGet:
+Install the core SocialCounter package and any platform-specific packages you need:
 
 ```sh
 dotnet add package SocialCounter
+dotnet add package SocialCounter.Instagram
+dotnet add package SocialCounter.X
+dotnet add package SocialCounter.TikTok
+dotnet add package SocialCounter.Facebook
+dotnet add package SocialCounter.LinkedIn
+dotnet add package SocialCounter.Youtube
 ```
 
 ### Basic Setup
@@ -40,33 +46,145 @@ public void ConfigureServices(IServiceCollection services)
         options.Timeout = TimeSpan.FromSeconds(10);
         options.MaxRetryAttempts = 3;
         options.InitialRetryDelay = TimeSpan.FromSeconds(1);
-    });
-
-    // Register your platform-specific implementations
+    })
+    .AddInstagramCounter()
+    .AddXCounter()
+    .AddTikTokCounter()
+    .AddFacebookCounter()
+    .AddLinkedInCounter()
+    .AddYoutubeCounter();
 }
 ```
 
 ### Basic Usage
 
 ```csharp
+// Using individual platform clients
 public class SocialMetricsService
 {
-    private readonly SocialCounters _counters;
+    private readonly InstagramCounterClient _instagramClient;
+    private readonly XCounterClient _xClient;
+    private readonly SocialCounters _allCounters;
 
-    public SocialMetricsService(SocialCounters counters)
+    public SocialMetricsService(
+        InstagramCounterClient instagramClient,
+        XCounterClient xClient,
+        SocialCounters allCounters)
     {
-        _counters = counters;
+        _instagramClient = instagramClient;
+        _xClient = xClient;
+        _allCounters = allCounters;
     }
 
-    public async Task<List<SocialCountResult>> GetMetricsAsync(string handle)
+    // Get metrics from a single platform
+    public async Task<SocialCountResult> GetInstagramMetricsAsync(string handle)
     {
-        var results = await _counters.GetCountAsync(handle, CancellationToken.None);
+        return await _instagramClient.GetCount(handle, CancellationToken.None);
+    }
+
+    // Get metrics from all configured platforms concurrently
+    public async Task<List<SocialCountResult>> GetAllMetricsAsync(string handle)
+    {
+        var results = await _allCounters.GetCountAsync(handle, CancellationToken.None);
         return results;
     }
 }
 ```
 
+## Supported Platforms
+
+### Instagram
+```csharp
+services.AddInstagramCounter();
+await instagramClient.GetCount("username", CancellationToken.None);
+```
+
+### X (Twitter)
+```csharp
+services.AddXCounter();
+await xClient.GetCount("username", CancellationToken.None);
+```
+
+### TikTok
+```csharp
+services.AddTikTokCounter();
+await tiktokClient.GetCount("username", CancellationToken.None);
+```
+
+### Facebook
+```csharp
+services.AddFacebookCounter();
+await facebookClient.GetCount("pagename", CancellationToken.None);
+```
+
+### LinkedIn
+```csharp
+services.AddLinkedInCounter();
+await linkedInClient.GetCount("username", CancellationToken.None);
+```
+
+### YouTube
+```csharp
+services.AddYoutubeCounter();
+await youtubeClient.GetCount("channelname", CancellationToken.None);
+```
+
 ## Features
+
+### Parallel Processing with Error Handling
+
+The `SocialCounters` class provides a unified way to fetch metrics from all configured platforms concurrently:
+
+```csharp
+public sealed class SocialCounters
+{
+    private readonly IEnumerable<SocialMediaClient> counters;
+    private readonly ILogger<SocialCounters> logger;
+
+    public SocialCounters(IEnumerable<SocialMediaClient> counters, ILogger<SocialCounters> logger)
+    {
+        this.counters = counters;
+        this.logger = logger;
+    }
+
+    public async Task<List<SocialCountResult>> GetCountAsync(
+        string handle,
+        CancellationToken cancellationToken
+    )
+    {
+        var results = new List<SocialCountResult>();
+
+        await Task.WhenAll(
+            this.counters.Select(async counter =>
+            {
+                try
+                {
+                    var result = await counter.GetCount(handle, cancellationToken);
+                    results.Add(result);
+                }
+                catch (Exception ex)
+                {
+                    // Log and continue
+                    this.logger.LogError(
+                        ex,
+                        "Failed to get count for {Platform} handle {Handle}",
+                        counter.Platform,
+                        handle
+                    );
+                }
+            })
+        );
+
+        return results;
+    }
+}
+```
+
+This implementation ensures:
+- Concurrent processing of all platform requests
+- Graceful error handling per platform
+- Failed requests don't block other platforms
+- Comprehensive logging of failures
 
 ### Resilient HTTP Operations
 
